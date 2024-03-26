@@ -34,7 +34,7 @@ module Audited
       end
 
       def text_column?
-        Audited.audit_class.columns_hash["audited_changes"].type.to_s == "text"
+        !ActiveRecord::Base.connection.mariadb? && Audited.audit_class.columns_hash["audited_changes"].type.to_s == "text"
       end
     end
   end
